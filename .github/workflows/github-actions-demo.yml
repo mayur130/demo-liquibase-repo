@@ -1,0 +1,27 @@
+name: Liquibase Pro Workflow
+
+on:
+  push:
+    branches:
+      - main  # Replace with the branch you want to trigger the workflow on
+
+jobs:
+  liquibase:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Run Liquibase Pro
+      env:
+        LIQUIBASE_PRO_LICENSE_KEY: ${{ secrets.LIQUIBASE_PRO_LICENSE_KEY }}
+      run: |
+        docker run --rm \
+          -e LIQUIBASE_LICENSE_KEY=$LIQUIBASE_PRO_LICENSE_KEY \
+          root/liquibase-pro:latest \
+          liquibase update
+
+    # Add more steps as needed, such as database deployment or testing.
+
+# Add additional jobs or steps for further automation as needed.
