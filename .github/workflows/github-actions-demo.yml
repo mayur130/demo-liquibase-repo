@@ -51,7 +51,7 @@ jobs:
         # Replace with the Liquibase Pro command to apply your changes
         # Example:
           liquibase --url=jdbc:mysql://database-1-instance-1.crot0ljdtzab.us-east-2.rds.amazonaws.com:5432 \
-            --username=postgres --password=postgres123 \
+            --username=postgres --password=Postgres123 \
             --changeLogFile=changelog.xml \
             update
 
