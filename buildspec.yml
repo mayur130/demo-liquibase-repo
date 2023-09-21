@@ -1,0 +1,18 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+    java: corretto11
+    commands:
+      - yum install java -y
+      -  wget https://github.com/liquibase/liquibase/releases/download/v4.23.2/liquibase-4.23.2.zip 
+        -  unzip liquibase-4.23.2.zip -d /opt
+        -  ln -s /opt/liquibase /usr/local/bin/liquibase
+         - chmod +x /usr/local/bin/liquibase
+          
+      - liquibase --version
+
+  build:
+    commands:
+      - liquibase --url=jdbc:mysql://database-1-instance-1.crot0ljdtzab.us-east-2.rds.amazonaws.com:5432 --username=postgres --password=Postgres123 --changeLogFile=changelog.xml --logLevel=DEBUG update > liquibase_debug.log 2>&1
