@@ -37,4 +37,28 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: us-east-2
 
-    # Add the Liquibase Pro step here or customize further as needed.
+    - name: Install Liquibase Pro
+      run: |
+        # Replace with the installation steps for Liquibase Pro on Amazon Linux 2
+        # Example: 
+          wget https://github.com/liquibase/liquibase/releases/download/v4.23.2/liquibase-4.23.2.zip 
+          unzip liquibase-4.23.2.zip -d /opt
+          ln -s /opt/liquibase /usr/local/bin/liquibase
+          chmod +x /usr/local/bin/liquibase
+
+    - name: Run Liquibase Pro
+      run: |
+        # Replace with the Liquibase Pro command to apply your changes
+        # Example:
+          liquibase --url=jdbc:mysql://database-1-instance-1.crot0ljdtzab.us-east-2.rds.amazonaws.com:5432 \
+            --username=postgres --password=postgres123 \
+            --changeLogFile=changelog.xml \
+            update
+
+      env:
+        RDS_HOST: ${{ secrets.RDS_HOST }}
+        DB_NAME: ${{ secrets.DB_NAME }}
+        DB_USER: ${{ secrets.DB_USER }}
+        DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+
+    # Add any additional steps or customizations as needed.
